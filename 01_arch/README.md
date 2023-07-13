@@ -91,15 +91,16 @@ Host: localhost:9002\r\n
 User-Agent: Go-http-client/1.1\r\n
 [truncated]Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImxvZ2luIjoidXNlciIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNjg4OTI2NjY3LCJleHAiOjE2ODg5MzAyNjd9.dBnOmkvHjTO0ukSNA9aIHdRBzSSb1n8AQS5LkBZE3Jh5WTUiGVU9RruciO6B9VCe75QbK
 Accept-Encoding: gzip\r\n
-4. Client --> Server 3 (запрос):
-Аутентификационны данные верны, доступ получен, попытка получить некоторые данные сервер 3,4
+4. Server 4 --> Server 3 (запрос):
+[{1 2 auto 1000000 1689251385} {2 2 auto 100000 1689251385} {3 2 food 100000 1689251385}]
+"GET http://localhost:9003/api/transactions HTTP/1.1" from [::1]:50640 - 200 291B in 8.0041ms
 GET /api/transactions HTTP/1.1\r\n
 Host: localhost:9003\r\n
 User-Agent: Go-http-client/1.1\r\n
 X-Userid: 2\r\n
 Accept-Encoding: gzip\r\n
-5. Client --> Server 4 (запрос):
-Аутентификационны данные верны, доступ получен, попытка получить некоторые данные сервер 3,4
+5. Server 3 --> Server 4 (запрос):
+"GET http://localhost:9004/api/transactions HTTP/1.1" from [::1]:50641 - 200 227B in 1.0014ms
 GET /api/transactions HTTP/1.1\r\n
 Host: localhost:9004\r\n
 User-Agent: Go-http-client/1.1\r\n
@@ -111,7 +112,7 @@ HTTP/1.1 200 OK\r\n
 Content-Type: application/json\r\n
 {"transactions":[{"id":1,"userId":2,"category":"auto","amount":1000000,"created":1688925938},{"id":2,"userId":2,"category":"auto","amount":100000,"created":1688925938},{"id":3,"userId":2,"category":"food","amount":100000,"created":1688925938}],"categoryStats":{"auto":1100000,"food":100000}}
 7. Server 3 --> Server 2 (ответ):
-Передача данных на сервер аутентификации
+Передача данных
 HTTP/1.1 200 OK\r\n
 Content-Type: application/json\r\n
 {"transactions":[{"id":1,"userId":2,"category":"auto","amount":1000000,"created":1688925938},{"id":2,"userId":2,"category":"auto","amount":100000,"created":1688925938},{"id":3,"userId":2,"category":"food","amount":100000,"created":1688925938}],"categoryStats":{"auto":1100000,"food":100000}}
